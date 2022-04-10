@@ -1,0 +1,79 @@
+<!-- ReSharper disable MarkupAttributeTypo -->
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaTest.MainWindow"
+        Title="Avalonia">
+  <Window.Styles>
+    <Style Selector="Border">
+      <Setter Property="Background" Value="LightGray"></Setter>
+      <Setter Property="BorderBrush" Value="Black"></Setter>
+      <Setter Property="BorderThickness" Value="1"></Setter>
+      <Setter Property="Margin" Value="3"></Setter>
+      <Setter Property="CornerRadius" Value="5"></Setter>
+      <Setter Property="Padding" Value="5"></Setter>
+    </Style>
+  </Window.Styles>
+  <Border Padding="10">
+    <Grid Margin="10" RowDefinitions="10*,75*,5*">
+      <Border Background="Wheat">
+        <Grid ColumnDefinitions="92*,8*">
+          <TextBox Name="PlaylistUrl" FontSize="14" TextWrapping="Wrap" Height="14" Padding="0" Watermark="Playlist url" GotFocus="PlaylistUrl_OnGotFocus"></TextBox>
+          <Button Name="ParseButton" Content="Start" BorderThickness="1" BorderBrush="Black" Grid.Column="1" Margin="5,0,0,0" Click="ParseButton_OnClick" IsEnabled="False"></Button>
+        </Grid>
+      </Border>
+      <Border Grid.Row = "1" Background= "White">
+        <Border.Styles>
+          <Style Selector="Border">
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="Padding" Value="0"></Setter>
+          </Style>
+        </Border.Styles>
+        <Grid ColumnDefinitions="30*,70*" Name="PlaylistInfo">
+          <Grid RowDefinitions="60*,40*" Name="PlaylistBio">
+            <Image Name="PlaylistImage" Stretch="Uniform"></Image>
+            <Border Grid.Row="1" Background="Transparent" Padding="0">
+              <Grid Name="PlaylistBioTextPart" RowDefinitions="1*,1*,1*,1*">
+                  <Grid.Styles>
+                      <Style Selector="TextBlock">
+                          <Setter Property="FontSize" Value="16"></Setter>
+                      </Style>
+                  </Grid.Styles>
+                <TextBlock  Grid.Row="0" Name="PlaylistName" TextWrapping="Wrap"></TextBlock>
+                <TextBlock Grid.Row="1" Name="PlaylistReleaseDate"></TextBlock>
+                <TextBlock Grid.Row="2" Name="PlaylistGenre"></TextBlock>
+                <TextBlock Grid.Row="3" Name="PlaylistRecordLabel"></TextBlock>
+              </Grid>
+            </Border>
+          </Grid>
+          <Border Background="Transparent" Padding="0" Grid.Column="1">
+            <ListBox Name="SongsList">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="Transparent" CornerRadius="4" Padding="0" Margin="0 " BorderThickness="1">
+                            <Grid RowDefinitions="1*,1*,1*,1*,1*">
+                                <Grid.Styles>
+                                    <Style Selector="TextBlock">
+                                        <Setter Property="FontSize" Value="14"></Setter>
+                                        <Setter Property="Margin" Value="5,5,0,0"></Setter>
+                                        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+                                    </Style>
+                                </Grid.Styles>
+                                <TextBlock Grid.Row="0" Text="{Binding SongName}"></TextBlock>
+                                <TextBlock Grid.Row="1" Text="{Binding ArtistName}"></TextBlock>
+                                <TextBlock Grid.Row="2" Text="{Binding AlbumName}"></TextBlock>
+                                <TextBlock Grid.Row="3" Text="{Binding Duration}"></TextBlock>
+                                <TextBlock Grid.Row="4" Text="{Binding Genre}"></TextBlock>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+          </Border>
+        </Grid>
+      </Border>
+    </Grid>
+  </Border>
+</Window>
