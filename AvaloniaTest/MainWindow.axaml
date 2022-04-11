@@ -25,14 +25,17 @@
         </Grid>
       </Border>
       <Border Grid.Row = "1" Background= "White" Name="PlayListBioContainer">
-        <Border.Styles>
-          <Style Selector="Border">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Padding" Value="0"/>
-          </Style>
-        </Border.Styles>
-        <Grid ColumnDefinitions="30*,70*" Name="PlaylistInfo">
-          <Grid Name="PlaylistBio" RowDefinitions="60*,40*" >
+            <Border.Styles>
+                <Style Selector="TextBlock.Content">
+                    <Setter Property="Grid.Column" Value="1"></Setter>
+                </Style>
+                <Style Selector="TextBlock.Title">
+                    <Setter Property="FontWeight" Value="DemiBold"></Setter>
+                </Style>
+            </Border.Styles>
+          
+            <Grid ColumnDefinitions="30*,70*" Name="PlaylistInfo">
+          <Grid Name="PlaylistBio" RowDefinitions="60*,40*">
             <Image Name="PlaylistImage" Stretch="Uniform" Margin="10"/>
             <Grid Grid.Row="1">
               <Grid Name="PlaylistBioTextPart" RowDefinitions="1*,1*,1*,1*">
@@ -43,20 +46,20 @@
                       </Style>
                   </Grid.Styles>
                 <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="Title : " FontWeight="DemiBold"/>
-                    <TextBlock Grid.Column="1" Name="PlaylistName" TextWrapping="Wrap"/>
+                    <TextBlock Text="Title : " Classes="Title"/>
+                    <TextBlock Name="PlaylistName" TextWrapping="Wrap" Classes="Content"/>
                 </Grid>
                 <Grid Grid.Row="1" ColumnDefinitions="Auto,* ">
-                    <TextBlock Text="Release date : " FontWeight="DemiBold"/>
-                    <TextBlock Grid.Column="1" Name="PlaylistReleaseDate"/>
+                    <TextBlock Text="Release date : " Classes="Title"/>
+                    <TextBlock Name="PlaylistReleaseDate" Classes="Content"/>
                 </Grid>
                 <Grid Grid.Row="2" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="Genre : " FontWeight="DemiBold"/>
-                    <TextBlock Grid.Column="1" Name="PlaylistGenre"/>
+                    <TextBlock Text="Genre : " Classes="Title"/>
+                    <TextBlock Name="PlaylistGenre" Classes="Content"/>
                 </Grid>
                 <Grid Grid.Row="3" ColumnDefinitions="Auto,*">
-                    <TextBlock Text="Label : " FontWeight="DemiBold"/>
-                    <TextBlock Grid.Column="1" Name="PlaylistRecordLabel"/>
+                    <TextBlock Text="Label : " Classes="Title"/>
+                    <TextBlock Name="PlaylistRecordLabel" Classes="Content"/>
                 </Grid>
               </Grid>
             </Grid>
@@ -75,24 +78,24 @@
                                     </Style>
                                 </Grid.Styles>
                                 <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
-                                    <TextBlock Text="Title : " FontWeight="DemiBold"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding SongName}"/>
+                                    <TextBlock Text="Title : " Classes="Title"/>
+                                    <TextBlock Text="{Binding SongName}" Classes="Content"/>
                                 </Grid>
                                 <Grid Grid.Row="1"  ColumnDefinitions="Auto,*">
-                                    <TextBlock Text="Artist : " FontWeight="DemiBold"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding ArtistName}"/>
+                                    <TextBlock Text="Artist : " Classes="Title"/>
+                                    <TextBlock Text="{Binding ArtistName}" Classes="Content"/>
                                 </Grid>
                                 <Grid Grid.Row="2"  ColumnDefinitions="Auto,*">
-                                    <TextBlock Text="Album : " FontWeight="DemiBold"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding AlbumName}"/>
+                                    <TextBlock Text="Album : " Classes="Title"/>
+                                    <TextBlock Text="{Binding AlbumName}" Classes="Content"/>
                                 </Grid>
                                 <Grid Grid.Row="3"  ColumnDefinitions="Auto,*" IsVisible="{Binding Duration, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
-                                    <TextBlock Text="Duration : " FontWeight="DemiBold"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding Duration}"/>
+                                    <TextBlock Text="Duration : " Classes="Title"/>
+                                    <TextBlock Text="{Binding Duration}" Classes="Content"/>
                                 </Grid>
                                 <Grid Grid.Row="4" ColumnDefinitions="Auto,*" IsVisible="{Binding Genre, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
-                                    <TextBlock Text="Genre : " FontWeight="DemiBold"/>
-                                    <TextBlock Grid.Column="1" Text="{Binding Genre}"/>
+                                    <TextBlock Text="Genre : " Classes="Title"/>
+                                    <TextBlock Text="{Binding Genre}" Classes="Content"/>
                                 </Grid>
                             </Grid>
                     </DataTemplate>
