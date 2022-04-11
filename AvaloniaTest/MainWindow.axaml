@@ -36,13 +36,16 @@
           
             <Grid ColumnDefinitions="30*,70*" Name="PlaylistInfo">
           <Grid Name="PlaylistBio" RowDefinitions="60*,40*">
-            <Image Name="PlaylistImage" Stretch="Uniform" Margin="10"/>
+            <Image Name="PlaylistImage" Stretch="Uniform" Margin="0,0,0,20"/>
             <Grid Grid.Row="1">
               <Grid Name="PlaylistBioTextPart" RowDefinitions="1*,1*,1*,1*">
                   <Grid.Styles>
                       <Style Selector="TextBlock">
                           <Setter Property="FontSize" Value="16"/>
                           <Setter Property="Margin" Value="5,0,0,0"></Setter>
+                      </Style>
+                      <Style Selector="TextBlock.Title">
+                          <Setter Property="Margin" Value="20,0,0,0"></Setter>
                       </Style>
                   </Grid.Styles>
                 <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
@@ -69,18 +72,23 @@
               <ListBox Grid.Row="1" Name="TrackList">
                   <ListBox.ItemTemplate>
                       <DataTemplate>
-                            <Grid RowDefinitions="1*,1*,1*,1*,1*">
+                            <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto">
                                 <Grid.Styles>
                                     <Style Selector="TextBlock">
                                         <Setter Property="FontSize" Value="14"></Setter>
-                                        <Setter Property="Margin" Value="5,5,0,0"></Setter>
+                                        <!-- For variant №1-->
+                                        <!--<Setter Property="Margin" Value="5,5,0,0"></Setter>-->
+
+                                        <!-- For variant №2-->
+                                        <Setter Property="Margin" Value="5,5,35,0"></Setter>
                                         <Setter Property="TextWrapping" Value="Wrap"></Setter>
                                     </Style>
                                 </Grid.Styles>
-                                <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
-                                    <TextBlock Text="Title : " Classes="Title"/>
-                                    <TextBlock Text="{Binding SongName}" Classes="Content"/>
-                                </Grid>
+                              <!--Variant 1-->
+                              <!--<Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+                                  <TextBlock Text="Title : " Classes="Title"/>
+                                  <TextBlock Text="{Binding SongName}" Classes="Content"/>
+                              </Grid>
                                 <Grid Grid.Row="1"  ColumnDefinitions="Auto,*">
                                     <TextBlock Text="Artist : " Classes="Title"/>
                                     <TextBlock Text="{Binding ArtistName}" Classes="Content"/>
@@ -96,7 +104,13 @@
                                 <Grid Grid.Row="4" ColumnDefinitions="Auto,*" IsVisible="{Binding Genre, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
                                     <TextBlock Text="Genre : " Classes="Title"/>
                                     <TextBlock Text="{Binding Genre}" Classes="Content"/>
-                                </Grid>
+                                </Grid>-->
+                              <!--Variant 2 (But without headers due to dynamic width of content)-->
+                              <TextBlock Grid.Column="0" Text="{Binding SongName}"/>
+                              <TextBlock Grid.Column="1" Text="{Binding ArtistName}"/>
+                              <TextBlock Grid.Column="2" Text="{Binding AlbumName}"/>
+                              <TextBlock Grid.Column="3" Text="{Binding Duration}" IsVisible="{Binding Duration, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
+                              <TextBlock Grid.Column="4" Text="{Binding Genre}" IsVisible="{Binding Genre, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
                             </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
