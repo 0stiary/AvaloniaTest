@@ -7,52 +7,65 @@
         x:Class="AvaloniaTest.MainWindow"
         Title="Avalonia">
   <Window.Styles>
-    <Style Selector="Border">
-      <Setter Property="Background" Value="LightGray"></Setter>
-      <Setter Property="BorderBrush" Value="Black"></Setter>
-      <Setter Property="BorderThickness" Value="1"></Setter>
-      <Setter Property="Margin" Value="3"></Setter>
-      <Setter Property="CornerRadius" Value="5"></Setter>
-      <Setter Property="Padding" Value="5"></Setter>
-    </Style>
+      <Style Selector="Border">
+          <Setter Property="Background" Value="LightGray"></Setter>
+          <Setter Property="BorderBrush" Value="Black"></Setter>
+          <Setter Property="BorderThickness" Value="1"></Setter>
+          <Setter Property="Margin" Value="3"></Setter>
+          <Setter Property="CornerRadius" Value="5"></Setter>
+          <Setter Property="Padding" Value="5"></Setter>
+      </Style>
   </Window.Styles>
   <Border Padding="10">
-    <Grid Margin="10" RowDefinitions="10*,75*,5*">
+    <Grid Margin="5" RowDefinitions="10*,75*">
       <Border Background="Wheat">
         <Grid ColumnDefinitions="92*,8*">
-          <TextBox Name="PlaylistUrl" FontSize="14" TextWrapping="Wrap" Height="14" Padding="0" Watermark="Playlist url" GotFocus="PlaylistUrl_OnGotFocus"></TextBox>
+          <TextBox Name="PlaylistUrl" FontSize="14" TextWrapping="Wrap" Height="16" Padding="0" Watermark="Playlist url" GotFocus="PlaylistUrl_OnGotFocus"></TextBox>
           <Button Name="ParseButton" Content="Start" BorderThickness="1" BorderBrush="Black" Grid.Column="1" Margin="5,0,0,0" Click="ParseButton_OnClick" IsEnabled="False"></Button>
         </Grid>
       </Border>
-      <Border Grid.Row = "1" Background= "White">
+      <Border Grid.Row = "1" Background= "White" Name="PlayListBioContainer">
         <Border.Styles>
           <Style Selector="Border">
-            <Setter Property="Background" Value="Transparent"></Setter>
-            <Setter Property="Padding" Value="0"></Setter>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
           </Style>
         </Border.Styles>
         <Grid ColumnDefinitions="30*,70*" Name="PlaylistInfo">
-          <Grid RowDefinitions="60*,40*" Name="PlaylistBio">
-            <Image Name="PlaylistImage" Stretch="Uniform"></Image>
-            <Border Grid.Row="1" Background="Transparent" Padding="0">
+          <Grid Name="PlaylistBio" RowDefinitions="60*,40*" >
+            <Image Name="PlaylistImage" Stretch="Uniform" Margin="10"/>
+            <Grid Grid.Row="1">
               <Grid Name="PlaylistBioTextPart" RowDefinitions="1*,1*,1*,1*">
                   <Grid.Styles>
                       <Style Selector="TextBlock">
-                          <Setter Property="FontSize" Value="16"></Setter>
+                          <Setter Property="FontSize" Value="16"/>
+                          <Setter Property="Margin" Value="5,0,0,0"></Setter>
                       </Style>
                   </Grid.Styles>
-                <TextBlock  Grid.Row="0" Name="PlaylistName" TextWrapping="Wrap"></TextBlock>
-                <TextBlock Grid.Row="1" Name="PlaylistReleaseDate"></TextBlock>
-                <TextBlock Grid.Row="2" Name="PlaylistGenre"></TextBlock>
-                <TextBlock Grid.Row="3" Name="PlaylistRecordLabel"></TextBlock>
+                <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+                    <TextBlock Text="Title : " FontWeight="DemiBold"/>
+                    <TextBlock Grid.Column="1" Name="PlaylistName" TextWrapping="Wrap"/>
+                </Grid>
+                <Grid Grid.Row="1" ColumnDefinitions="Auto,* ">
+                    <TextBlock Text="Release date : " FontWeight="DemiBold"/>
+                    <TextBlock Grid.Column="1" Name="PlaylistReleaseDate"/>
+                </Grid>
+                <Grid Grid.Row="2" ColumnDefinitions="Auto,*">
+                    <TextBlock Text="Genre : " FontWeight="DemiBold"/>
+                    <TextBlock Grid.Column="1" Name="PlaylistGenre"/>
+                </Grid>
+                <Grid Grid.Row="3" ColumnDefinitions="Auto,*">
+                    <TextBlock Text="Label : " FontWeight="DemiBold"/>
+                    <TextBlock Grid.Column="1" Name="PlaylistRecordLabel"/>
+                </Grid>
               </Grid>
-            </Border>
+            </Grid>
           </Grid>
-          <Border Background="Transparent" Padding="0" Grid.Column="1">
-            <ListBox Name="SongsList">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Border Background="Transparent" CornerRadius="4" Padding="0" Margin="0 " BorderThickness="1">
+          <Grid Grid.Column="1" RowDefinitions="Auto,*">
+              <TextBlock FontSize="16" FontWeight="Bold" Text="Tracks" Margin="5, 5,0, 0"></TextBlock>
+              <ListBox Grid.Row="1" Name="TrackList">
+                  <ListBox.ItemTemplate>
+                      <DataTemplate>
                             <Grid RowDefinitions="1*,1*,1*,1*,1*">
                                 <Grid.Styles>
                                     <Style Selector="TextBlock">
@@ -61,17 +74,31 @@
                                         <Setter Property="TextWrapping" Value="Wrap"></Setter>
                                     </Style>
                                 </Grid.Styles>
-                                <TextBlock Grid.Row="0" Text="{Binding SongName}"></TextBlock>
-                                <TextBlock Grid.Row="1" Text="{Binding ArtistName}"></TextBlock>
-                                <TextBlock Grid.Row="2" Text="{Binding AlbumName}"></TextBlock>
-                                <TextBlock Grid.Row="3" Text="{Binding Duration}"></TextBlock>
-                                <TextBlock Grid.Row="4" Text="{Binding Genre}"></TextBlock>
+                                <Grid Grid.Row="0" ColumnDefinitions="Auto,*">
+                                    <TextBlock Text="Title : " FontWeight="DemiBold"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding SongName}"/>
+                                </Grid>
+                                <Grid Grid.Row="1"  ColumnDefinitions="Auto,*">
+                                    <TextBlock Text="Artist : " FontWeight="DemiBold"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding ArtistName}"/>
+                                </Grid>
+                                <Grid Grid.Row="2"  ColumnDefinitions="Auto,*">
+                                    <TextBlock Text="Album : " FontWeight="DemiBold"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding AlbumName}"/>
+                                </Grid>
+                                <Grid Grid.Row="3"  ColumnDefinitions="Auto,*" IsVisible="{Binding Duration, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                                    <TextBlock Text="Duration : " FontWeight="DemiBold"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Duration}"/>
+                                </Grid>
+                                <Grid Grid.Row="4" ColumnDefinitions="Auto,*" IsVisible="{Binding Genre, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                                    <TextBlock Text="Genre : " FontWeight="DemiBold"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Genre}"/>
+                                </Grid>
                             </Grid>
-                        </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-          </Border>
+          </Grid>
         </Grid>
       </Border>
     </Grid>
