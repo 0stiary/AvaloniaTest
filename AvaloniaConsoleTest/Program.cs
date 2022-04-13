@@ -14,10 +14,11 @@ namespace AvaloniaConsoleTest
 		static void Main(string[] args)
 		{
 			Console.WindowWidth = 160;
-			var isError = false;
+			bool isError;
 
 			do
 			{
+				isError = false;
 				Console.Write("Insert playlist url : ");
 				var playlistUrl = Console.ReadLine();
 				try
