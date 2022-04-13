@@ -67,7 +67,7 @@ namespace AvaloniaTest
 			playlistImage =  BitmapImageFromUrl(playlistInfoNode.SelectSingleNode("//div[@class='h-100 image']/img").Attributes["src"].Value);
 			playlistTitle = listingInfoNode.SelectSingleNode("//h1[@class='artist']").InnerHtml;
 			playlistLabel = playlistInfoNode.SelectSingleNode("//div[@class='details']")
-				.SelectSingleNode("//p[contains(text(), 'Label')]/span/a").InnerHtml;
+											.SelectSingleNode("//p[contains(text(), 'Label')]/span/a").InnerHtml;
 			
 			return listingInfoNode;
 		}
